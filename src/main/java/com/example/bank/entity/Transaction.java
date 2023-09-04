@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.mapping.ToOne;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -26,12 +27,6 @@ public class Transaction {
     @UuidGenerator(style = UuidGenerator.Style.TIME)
     private UUID id;
 
-    @Column(name = "debit_account_id", updatable = false)
-    private Account debitAccountId;
-
-    @Column(name = "credit_account_id", updatable = false)
-    private Account creditAccountId;
-
     private Integer type;
 
     private BigDecimal amount;
@@ -41,13 +36,13 @@ public class Transaction {
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "debit_account_id", referencedColumnName = "id", nullable = false)
-    private Account accountByDebitAccountId;
+    private Account debitAccountId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "credit_account_id", referencedColumnName = "id", nullable = false)
-    private Account accountByCreditAccountId;
+    private Account creditAccountId;
 
     @Override
     public boolean equals(Object o) {
@@ -59,5 +54,18 @@ public class Transaction {
     @Override
     public int hashCode() {
         return Objects.hash(id, debitAccountId, creditAccountId);
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", debitAccountId=" + debitAccountId +
+                ", creditAccountId=" + creditAccountId +
+                ", type=" + type +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

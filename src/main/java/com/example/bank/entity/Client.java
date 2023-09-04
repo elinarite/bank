@@ -51,15 +51,33 @@ public class Client {
     @Column(name = "update_at")
     private Timestamp updateAt;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Client client)) return false;
-        return Objects.equals(id, client.id) && Objects.equals(taxCode, client.taxCode);
+        return Objects.equals(id, client.id) && Objects.equals(taxCode, client.taxCode) && Objects.equals(email, client.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, taxCode);
+        return Objects.hash(id, taxCode, email);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", managerId=" + managerId +
+                ", status=" + status +
+                ", taxCode='" + taxCode + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", createdAt=" + createdAt +
+                ", updateAt=" + updateAt +
+                '}';
     }
 }

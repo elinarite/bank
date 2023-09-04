@@ -52,4 +52,17 @@ public class Manager {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "id=" + id +
+                ", firsName='" + firsName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", updateAt=" + updateAt +
+                ", clients=" + clients +
+                '}';
+    }
 }

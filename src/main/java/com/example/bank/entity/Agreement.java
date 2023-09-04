@@ -28,7 +28,7 @@ public class Agreement {
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account accountId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product productId;
 
@@ -55,5 +55,19 @@ public class Agreement {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Agreement{" +
+                "id=" + id +
+                ", accountId=" + accountId +
+                ", productId=" + productId +
+                ", interestRate=" + interestRate +
+                ", status=" + status +
+                ", sum=" + sum +
+                ", createdAt=" + createdAt +
+                ", updateAt=" + updateAt +
+                '}';
     }
 }

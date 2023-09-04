@@ -20,7 +20,6 @@ import java.util.UUID;
 @Table(name = "account")
 public class Account {
 
-    //todo UUID
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @UuidGenerator(style = UuidGenerator.Style.TIME)
@@ -30,7 +29,8 @@ public class Account {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client clientId;
 
-    private String name;
+    @Column(name = "account_number")
+    private String accountNumber;
 
     private Integer type;
 
@@ -57,5 +57,20 @@ public class Account {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", clientId=" + clientId +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", type=" + type +
+                ", status=" + status +
+                ", balance=" + balance +
+                ", currencyCode=" + currencyCode +
+                ", createdAt=" + createdAt +
+                ", updateAt=" + updateAt +
+                '}';
     }
 }

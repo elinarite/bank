@@ -27,8 +27,8 @@ public class Product {
     @JoinColumn (name = "manager_id", referencedColumnName = "id")
     private Manager managerId;
 
-    //todo BD unique
-    private String name;
+    @Column(name = "product_typ")
+    private String productTyp;
 
     private Integer status;
 
@@ -51,11 +51,26 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Product product)) return false;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name);
+        return Objects.equals(id, product.id) && Objects.equals(productTyp, product.productTyp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, productTyp);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", managerId=" + managerId +
+                ", productTyp='" + productTyp + '\'' +
+                ", status=" + status +
+                ", currencyCode=" + currencyCode +
+                ", interestRate=" + interestRate +
+                ", limit=" + limit +
+                ", createdAt=" + createdAt +
+                ", updateAt=" + updateAt +
+                '}';
     }
 }

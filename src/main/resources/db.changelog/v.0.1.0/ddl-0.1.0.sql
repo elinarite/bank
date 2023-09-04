@@ -27,21 +27,22 @@ create table if not exists bank.client
     created_at timestamp DEFAULT CURRENT_TIMESTAMP,
     update_at  timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     foreign key (manager_id) references manager (id),
-    unique (tax_code, id)
+    unique (tax_code, email)
 );
 
 create table if not exists bank.account
 (
-    id            binary(16) primary key,
-    client_id     binary(16)               not null,
-    name          varchar(100)             not null,
-    type          integer(1)               not null,
-    status        integer(1)               not null,
-    balance       decimal(15, 2) DEFAULT 0 not null,
-    currency_code integer(2)               not null,
-    created_at    timestamp      DEFAULT CURRENT_TIMESTAMP,
-    update_at     timestamp      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    foreign key (client_id) references client (id)
+    id             binary(16) primary key,
+    client_id      binary(16)               not null,
+    account_number varchar(20)              not null,
+    type           integer(1)               not null,
+    status         integer(1)               not null,
+    balance        decimal(15, 2) DEFAULT 0 not null,
+    currency_code  integer(2)               not null,
+    created_at     timestamp      DEFAULT CURRENT_TIMESTAMP,
+    update_at      timestamp      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    foreign key (client_id) references client (id),
+    unique (account_number)
 );
 
 create table if not exists bank.transaction
@@ -61,14 +62,15 @@ create table if not exists bank.product
 (
     id            bigint primary key auto_increment,
     manager_id    bigint        not null,
-    name          varchar(70)   not null,
+    product_typ   varchar(70)   not null,
     status        integer(1)    not null,
     currency_code integer(2)    not null,
     interest_rate decimal(6, 4) not null,
     product_limit integer       not null,
     created_at    timestamp DEFAULT CURRENT_TIMESTAMP,
     update_at     timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    foreign key (manager_id) references manager (id)
+    foreign key (manager_id) references manager (id),
+    unique (product_typ)
 );
 
 create table if not exists bank.agreement

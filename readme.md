@@ -9,7 +9,7 @@ Data consist of clients, accounts, products, accounts, transactions and managers
 
 - JDK - v.17.07.7
 - Lombok - v.1.18.26
-- Hibernate - 
+- Hibernate - v.6.1.7
 - Spring Boot v.3.0.4
 - MySQL v.8.0.32
 - Liquibase v.4.23.0

@@ -7,6 +7,10 @@ spring:
     username: root
     password: Elina1980.
 
+  jpa:
+    generate-ddl: true
+    show-sql: true
+
   liquibase:
     change-log: classpath:db.changelog/changelog-master.yaml
     enabled: true

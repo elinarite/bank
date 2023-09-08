@@ -1,45 +1,60 @@
 package com.example.bank.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "manager")
+@Table(name = "managers")
 public class Manager {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "firs_name")
+    @NotEmpty(message = "First name cant be empty")
+    @Column(name = "firs_name", nullable = false)
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters long")
     private String firsName;
 
-    @Column(name = "last_name")
+    @NotEmpty(message = "Last name cant be empty")
+    @Column(name = "last_name", nullable = false)
+    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters long")
     private String lastName;
 
+    @NotNull(message = "Status cant be empty")
+    @Column(name = "status")
     private Integer status;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private Date createdAt;
 
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_at")
-    private Timestamp updateAt;
+    private Date updateAt;
 
-    @OneToMany(mappedBy = "managerId")
-    private Set<Client> clients;
+    @OneToMany(mappedBy = "managerId", fetch = FetchType.LAZY)
+    private List<Account> accounts;
 
     @Override
     public boolean equals(Object o) {
@@ -62,7 +77,6 @@ public class Manager {
                 ", status=" + status +
                 ", createdAt=" + createdAt +
                 ", updateAt=" + updateAt +
-                ", clients=" + clients +
                 '}';
     }
 }

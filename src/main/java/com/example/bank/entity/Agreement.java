@@ -1,14 +1,16 @@
 package com.example.bank.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Getter
@@ -16,34 +18,40 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "agreement")
+@Table(name = "agreements")
 public class Agreement {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @Column(name = "id", updatable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id", referencedColumnName = "id", updatable = false)
     private Account accountId;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "id", updatable = false)
     private Product productId;
 
     @Column(name = "interest_rate")
     private BigDecimal interestRate;
 
+    @Column(name = "status")
     private Integer status;
 
+    @Column(name = "sum")
     private BigDecimal sum;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private Date createdAt;
 
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_at")
-    private Timestamp updateAt;
+    private Date updateAt;
 
     @Override
     public boolean equals(Object o) {

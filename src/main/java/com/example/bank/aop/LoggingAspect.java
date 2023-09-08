@@ -27,7 +27,7 @@ public class LoggingAspect {
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
 
-        log.info("-------- Executing "+ className + "." + methodName + "   ----------- ");
+        log.info("-------- Executing 1"+ className + "." + methodName + "   ----------- ");
 
         StopWatch countdown = new StopWatch();
 

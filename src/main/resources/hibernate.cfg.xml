@@ -4,11 +4,25 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url"/>
-    <property name="connection.driver_class"/>
+<!--    <property name="connection.url"/>-->
+<!--    <property name="connection.driver_class"/>-->
+    <property name="connection.url">jdbc:mysql://localhost:3306/</property>
+    <!--        <property name="connection.driver_class">org.mysql.Driver</property>-->
+    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+
+    <property name="connection.username">root</property>
+    <property name="connection.password">Elina1980.</property>
+
+    <property name="hibernate.cache.use_second_level_cache">true</property>
+    <property name="hibernate.generate_statistics">true</property>
     <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
-
+    <mapping class="com.example.bank.entity.Account"/>
+    <mapping class="com.example.bank.entity.Agreement"/>
+    <mapping class="com.example.bank.entity.Client"/>
+    <mapping class="com.example.bank.entity.Manager"/>
+    <mapping class="com.example.bank.entity.Product"/>
+    <mapping class="com.example.bank.entity.Transaction"/>
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
   </session-factory>

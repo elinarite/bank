@@ -21,6 +21,7 @@
         <java.version>17</java.version>
 <!--        <javax.version>2.2.</javax.version>-->
         <liquibase.version>4.23.0</liquibase.version>
+        <spring-validation.varsion>3.0.3</spring-validation.varsion>
     </properties>
 
     <dependencies>
@@ -38,11 +39,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--        Java Persistence API -->
+
+        <!--        validation          -->
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
-            <version>2.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>${spring-validation.varsion}</version>
         </dependency>
 
         <!--		code generation				-->

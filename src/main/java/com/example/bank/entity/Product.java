@@ -1,13 +1,16 @@
 package com.example.bank.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Getter
@@ -15,21 +18,18 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id",updatable = false)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn (name = "manager_id", referencedColumnName = "id")
-    private Manager managerId;
 
     @Column(name = "product_typ")
     private String productTyp;
 
+    @Column(name = "status")
     private Integer status;
 
     @Column(name = "currency_code")
@@ -41,11 +41,15 @@ public class Product {
     @Column(name = "product_limit")
     private Integer limit;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private Date createdAt;
 
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_at")
-    private Timestamp updateAt;
+    private Date updateAt;
 
     @Override
     public boolean equals(Object o) {
@@ -63,7 +67,6 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", managerId=" + managerId +
                 ", productTyp='" + productTyp + '\'' +
                 ", status=" + status +
                 ", currencyCode=" + currencyCode +
